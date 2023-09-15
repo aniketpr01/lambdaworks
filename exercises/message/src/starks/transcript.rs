@@ -88,7 +88,7 @@ mod tests {
                 montgomery_backed_prime_fields::{IsModulus, U256PrimeField},
             },
         },
-        unsigned_integer::element::U256,
+        unsigned_integer::u64_utils::element::U256,
     };
 
     use crate::starks::transcript::randomness_to_field;

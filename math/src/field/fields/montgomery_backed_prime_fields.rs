@@ -3,8 +3,8 @@ use crate::field::errors::FieldError;
 use crate::field::traits::IsPrimeField;
 use crate::traits::ByteConversion;
 use crate::{
-    field::traits::IsField, unsigned_integer::element::UnsignedInteger,
-    unsigned_integer::montgomery::MontgomeryAlgorithms,
+    field::traits::IsField, unsigned_integer::u64_utils::element::UnsignedInteger,
+    unsigned_integer::u64_utils::montgomery::MontgomeryAlgorithms,
 };
 
 use core::fmt::Debug;
@@ -362,8 +362,8 @@ mod tests_u384_prime_fields {
     use crate::field::traits::IsPrimeField;
     #[cfg(feature = "std")]
     use crate::traits::ByteConversion;
-    use crate::unsigned_integer::element::U384;
-    use crate::unsigned_integer::element::{UnsignedInteger, U256};
+    use crate::unsigned_integer::u64_utils::element::U384;
+    use crate::unsigned_integer::u64_utils::element::{UnsignedInteger, U256};
 
     #[derive(Clone, Debug)]
     struct U384Modulus23;
@@ -749,8 +749,8 @@ mod tests_u256_prime_fields {
     use crate::field::traits::IsPrimeField;
     #[cfg(feature = "std")]
     use crate::traits::ByteConversion;
-    use crate::unsigned_integer::element::UnsignedInteger;
-    use crate::unsigned_integer::element::U256;
+    use crate::unsigned_integer::u64_utils::element::UnsignedInteger;
+    use crate::unsigned_integer::u64_utils::element::U256;
 
     #[derive(Clone, Debug)]
     struct U256Modulus29;

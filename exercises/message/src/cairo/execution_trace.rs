@@ -7,7 +7,7 @@ use lambdaworks_math::{
         fields::fft_friendly::stark_252_prime_field::Stark252PrimeField,
         traits::{IsFFTField, IsPrimeField},
     },
-    unsigned_integer::element::UnsignedInteger,
+    unsigned_integer::u64_utils::element::UnsignedInteger,
 };
 use num_integer::div_ceil;
 

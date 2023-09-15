@@ -20,7 +20,7 @@ use lambdaworks_math::{
         element::FieldElement, fields::montgomery_backed_prime_fields::MontgomeryBackendPrimeField,
     },
     polynomial::Polynomial,
-    unsigned_integer::element::UnsignedInteger,
+    unsigned_integer::u64_utils::element::UnsignedInteger,
 };
 
 type G1Point = ShortWeierstrassProjectivePoint<BLS12381Curve>;

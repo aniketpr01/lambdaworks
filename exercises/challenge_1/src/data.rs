@@ -1,4 +1,4 @@
-use lambdaworks_math::unsigned_integer::element::UnsignedInteger;
+use lambdaworks_math::unsigned_integer::u64_utils::element::UnsignedInteger;
 
 use crate::field::ChallengeElement;
 

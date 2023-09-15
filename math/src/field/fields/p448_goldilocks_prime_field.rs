@@ -1,6 +1,6 @@
 use crate::field::errors::FieldError;
 use crate::field::traits::IsField;
-use crate::unsigned_integer::element::UnsignedInteger;
+use crate::unsigned_integer::u64_utils::element::UnsignedInteger;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct P448GoldilocksPrimeField;

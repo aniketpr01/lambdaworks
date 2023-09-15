@@ -16,22 +16,41 @@ impl MontgomeryAlgorithms {
         mu: &u64,
     ) -> UnsignedInteger<NUM_LIMBS> {
         let mut t = [0_u64; NUM_LIMBS];
+        // t = [0, 0, 0, 0, 0, 0] (since 'U384" implies 6 limbs of 64 bits each)
         let mut t_extra = [0_u64; 2];
+        // t_extra = [0, 0]
         let mut i: usize = NUM_LIMBS;
         while i > 0 {
+            // this loop is for b.limbs as in line 33, b.limbs is referring to i
             i -= 1;
             // C := 0
             let mut c: u128 = 0;
+            // this is for carry
 
             // for j=N-1 to 0
             //    (C,t[j]) := t[j] + a[j]*b[i] + C
             let mut cs: u128;
+            // this is because of product of 2 64 bit will be 128
             let mut j: usize = NUM_LIMBS;
             while j > 0 {
                 j -= 1;
                 cs = t[j] as u128 + (a.limbs[j] as u128) * (b.limbs[i] as u128) + c;
+                // a.limbs = [1,2,3,4] b.limbs = [5,6,7,8] t = [0,0,0,0] c=0
+                // hence here i = 3, so b.limbs[3] = 8
+                // when j = 3, cs = 0 + 4 * 8 + 0 = 32
+                // when j = 2, cs = 0 + 3 * 8 + 0 = 24
+                // when j = 1, cs = 0 + 2 * 8 + 0 = 16
+                // when j = 0, cs = 0 + 1 * 8 + 0 = 8
                 c = cs >> 64;
+                // value of c will always be 0 because upper/higher bits are zero,
+                // and right shifting will discard lower bits which has a value and 
+                // make c = 0, only if lower bit value is less than 2^64
                 t[j] = cs as u64;
+                // lower bits of cs
+                // for j = 3, t[3] = 32 
+                // for j = 2, t[2] = 24
+                // for j = 1, t[1] = 16
+                // for j = 0, t[0] = 8
             }
 
             // (t_extra[0],t_extra[1]) := t_extra[1] + C
@@ -43,9 +62,24 @@ impl MontgomeryAlgorithms {
 
             // m := t[N-1]*q'[N-1] mod D
             let m = ((t[NUM_LIMBS - 1] as u128 * *mu as u128) << 64) >> 64;
+            // i = 3, t[4-1] = 32, (32 * 3208129404123400281) << 64 >> 64 = 10266006093186880912
+            // i = 2, t[3-1] = 24, (24 * 3208129404123400281) << 64 >> 64 = 76994765698961606744
+            // similarly for i = 1, and i = 0
 
             // (C,_) := t[N-1] + m*q[N-1]
             c = (t[NUM_LIMBS - 1] as u128 + m * (q.limbs[NUM_LIMBS - 1] as u128)) >> 64;
+            // a.limbs [1,2,3,4]
+            // b.limbs [5,6,7,8]
+            // q.limbs = [9, 10, 11, 12]
+            // t = [0,0,0,0]
+            // t[NUM_LIMBS - 1] is t[3], which becomes 32 after the first iteration.
+            // m = 10266006093186880912
+            // c = (32 + 10266006093186880912 * 12) >> 64
+            // c = (32 + 123192073118242570944) >> 64
+            // c = 123192073118242570976 >> 64
+            // c = 123192073118242570976 / (2^64)
+            // c = 1
+            // similary for all other iterations, c results to 1 
 
             // for j=N-1 to 1
             //    (C,t[j+1]) := t[j] + m*q[j] + C
@@ -207,7 +241,7 @@ impl MontgomeryAlgorithms {
 
 #[cfg(test)]
 mod tests {
-    use crate::unsigned_integer::{element::U384, montgomery::MontgomeryAlgorithms};
+    use crate::unsigned_integer::u64_utils::{element::U384, montgomery::MontgomeryAlgorithms};
 
     use proptest::prelude::*;
 

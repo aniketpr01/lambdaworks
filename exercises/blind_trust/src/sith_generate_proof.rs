@@ -14,7 +14,7 @@ use lambdaworks_math::{
         traits::{IsEllipticCurve, IsPairing},
     },
     traits::IsRandomFieldElementGenerator,
-    unsigned_integer::element::U256,
+    unsigned_integer::u64_utils::element::U256,
 };
 use lambdaworks_plonk::{
     prover::{Proof, Prover},

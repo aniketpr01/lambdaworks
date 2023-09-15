@@ -6,7 +6,7 @@ use lambdaworks_math::field::{
     fields::fft_friendly::stark_252_prime_field::Stark252PrimeField
 };
 use ibig::{modular::ModuloRing, UBig};
-use lambdaworks_math::unsigned_integer::element::UnsignedInteger;
+use lambdaworks_math::unsigned_integer::u64_utils::element::UnsignedInteger;
 
 fuzz_target!(|values: (u64, u64)| {
 

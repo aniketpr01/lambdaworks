@@ -1,8 +1,8 @@
 use crate::errors::CreationError;
 use crate::field::errors::FieldError;
 use crate::field::traits::IsField;
-use crate::unsigned_integer::element::UnsignedInteger;
-use crate::unsigned_integer::montgomery::MontgomeryAlgorithms;
+use crate::unsigned_integer::u64_utils::element::UnsignedInteger;
+use crate::unsigned_integer::u64_utils::montgomery::MontgomeryAlgorithms;
 use crate::unsigned_integer::traits::IsUnsignedInteger;
 use core::fmt;
 use core::fmt::Debug;
@@ -531,7 +531,7 @@ mod tests {
     use crate::field::fields::u64_prime_field::U64PrimeField;
     use crate::field::test_fields::u64_test_field::U64TestField;
     #[cfg(feature = "std")]
-    use crate::unsigned_integer::element::UnsignedInteger;
+    use crate::unsigned_integer::u64_utils::element::UnsignedInteger;
     #[cfg(feature = "std")]
     use proptest::collection;
     use proptest::{prelude::*, prop_compose, proptest, strategy::Strategy};

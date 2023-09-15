@@ -9,7 +9,7 @@ use lambdaworks_math::{
     msm::pippenger::msm,
     polynomial::Polynomial,
     traits::{Deserializable, Serializable},
-    unsigned_integer::element::UnsignedInteger,
+    unsigned_integer::u64_utils::element::UnsignedInteger,
 };
 use std::{marker::PhantomData, mem};
 
@@ -269,7 +269,7 @@ mod tests {
         field::element::FieldElement,
         polynomial::Polynomial,
         traits::{Deserializable, Serializable},
-        unsigned_integer::element::U256,
+        unsigned_integer::u64_utils::element::U256,
     };
 
     use crate::commitments::traits::IsCommitmentScheme;
